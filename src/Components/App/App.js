@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import { Spotify } from '../../util/Spotify';
 import { Playlist } from '../Playlist/Playlist';
@@ -22,17 +22,15 @@ class App extends React.Component {
     }
 
     addTrack(track) {
-      if (!this.state.playlistTracks.includes(track.id)) {
+      if (!this.state.playlistTracks.find(playlistTrack => playlistTrack.id === track.id)) {
         let updatedPlaylist = this.state.playlistTracks.concat(track);
         this.setState({ playlistTracks: updatedPlaylist });
       }
     }
 
     removeTrack(track) {
-    if (this.state.playlistTracks.includes(track.id)) {
       let currentPlaylist = this.state.playlistTracks;
       this.setState({ playlistTracks: currentPlaylist.filter(checkTrack => checkTrack.id !== track.id) });
-    }
   }
 
     updatePlaylistName(name) {
@@ -74,7 +72,7 @@ class App extends React.Component {
                 onRemove={this.removeTrack}
                 />
               <Playlist
-                playlistName={ this.state.playlistName }
+                name={ this.state.playlistName }
                 playlistTracks={ this.state.playlistTracks }
                 onNameChange={ this.updatePlaylistName }
                 onSave={ this.savePlaylist }

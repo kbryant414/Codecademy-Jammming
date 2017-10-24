@@ -7,7 +7,7 @@ let expiresIn;
 export const Spotify = {
   getAccessToken() {
     if (accessToken) {
-      return accessToken;
+      return new Promise(resolve => resolve(accessToken));
     }
 
     const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
@@ -18,9 +18,7 @@ export const Spotify = {
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
     } else {
-      const scope = 'user-read-private playlist-modify-public';
-      const redirectUrl = ''
-      window.location = redirectUrl
+      window.location = redirectUrl;
     }
   },
 

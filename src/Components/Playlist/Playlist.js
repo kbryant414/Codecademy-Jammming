@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Playlist.css';
 import { TrackList } from '../TrackList/TrackList';
 
@@ -16,7 +16,7 @@ export class Playlist extends React.Component {
     return (
       <div className="Playlist">
         <input
-          defaultValue={ this.props.name }
+          value={ this.props.name }
           onChange={ this.handleNameChange }
           />
         <TrackList
